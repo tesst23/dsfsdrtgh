@@ -2,11 +2,7 @@ version: 2.1
 jobs:
   check:
     docker:
-      # specify the version you desire h
       - image: circleci/node:12
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
       
     resource_class: medium
 
@@ -43,7 +39,7 @@ jobs:
 workflows:
   version: 2
 
-  constantly_check:
+  run:
     triggers:
       - schedule:
           cron: "15 6,12,18,0 * * *"
@@ -52,7 +48,6 @@ workflows:
               only:
                 - main
                 - master
-                - beta
       - schedule:
           cron: "16 6,12,18,0 * * *"
           filters:
@@ -60,7 +55,6 @@ workflows:
               only:
                 - main
                 - master
-                - beta
       - schedule:
           cron: "17 6,12,18,0 * * *"
           filters:
@@ -76,6 +70,5 @@ workflows:
               only:
                 - main
                 - master
-                - beta
     jobs:
       - check
